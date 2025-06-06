@@ -34,3 +34,12 @@ const calculate = function() {
     else return alert("WRONG DUMB BOI!!")
 };
 
+//
+
+const buttonPress = document.querySelector("#numPad")
+const buttonValue = document.querySelector(".buttonValue")
+const displayUpdate = document.querySelector("#display")
+
+buttonPress.addEventListener("click", () => {
+    displayUpdate.textContent = buttonValue.textContent
+})
