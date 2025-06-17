@@ -2,7 +2,7 @@
 let value1 = "";
 let value2 = "";
 let operator = "";
-let inputValues = [0, 0]
+let inputValues = [0, 0];
 
 // Functions for calculations(add,subtract,multiply and divide), all setup to operate using an array
 const addition = function (value1, value2) {
@@ -12,8 +12,11 @@ const addition = function (value1, value2) {
     return addTotal;
   };
 
-const subtract = function (array) {
-    return array.reduce((total, num) => total - num);
+const subtract = function (value1, value2) {
+    const num1 = parseFloat(value1);
+    const num2 = parseFloat(value2);
+    subTotal = num1 - num2;
+    return subTotal;
 };
 
 const multiply = function(array) {
@@ -34,7 +37,7 @@ const calculate = function() {
         return multiply(inputValues);
     else if (operator === "/")
         return divide(inputValues);
-    else return alert("WRONG DUMB BOI!!");
+    else return alert("INCORRECT FORMATING!");
 };
 
 // Fill display with value
@@ -49,9 +52,14 @@ buttonPressNum.addEventListener("click", (event) => {
 const buttonPressOp = document.querySelector("#cmdPad2");
 
 buttonPressOp.addEventListener("click", (event) => {
-    value1 = displayUpdate.textContent
-    operator = event.target.textContent
-    displayUpdate.textContent = ""
+    if (operator != "") 
+        return value2 = displayUpdate.textContent,
+               value1 = calculate(),
+               displayUpdate.textContent = "",
+               operator = event.target.textContent;
+    else return value1 = displayUpdate.textContent,
+                operator = event.target.textContent,
+                displayUpdate.textContent = "";      
 });
 
 // Stores 2nd value & activates calucate function
@@ -61,6 +69,9 @@ buttonPressEval.addEventListener("click", () => {
     value2 = displayUpdate.textContent
     inputValues = [value1, value2]
     displayUpdate.textContent = calculate()
+    value1 = calculate()
+    value2 = ""
+    operator = ""
 });
 
 // Clears & resets all values
