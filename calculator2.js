@@ -51,10 +51,14 @@ const buttonPressNum = document.querySelector("#numPad");
 const displayUpdate = document.querySelector("#display");
 const buttonPressDec = document.querySelector("#decimal");
 
+buttonPressDec.addEventListener("click", () => {
+    buttonPressDec.disabled = true;
+});
+
 buttonPressNum.addEventListener("click", (event) => {
-    if (setCheck === true) 
+    if (setCheck) 
         return displayUpdate.textContent = "" + event.target.textContent, setCheck = false;
-    else displayUpdate.textContent = displayUpdate.textContent + event.target.textContent
+    else return displayUpdate.textContent = displayUpdate.textContent + event.target.textContent
 });
 
 // ---- END ---- //
@@ -64,8 +68,8 @@ const buttonPressOp = document.querySelector("#cmdPad2");
 
 buttonPressOp.addEventListener("click", (event) => {
     if (operator != "") 
-        return input2 = displayUpdate.textContent, startCalculate(), displayUpdate.textContent = output, operator = event.target.textContent;
-    else return input1 = displayUpdate.textContent, operator = event.target.textContent, displayUpdate.textContent = "";
+        return input2 = displayUpdate.textContent, startCalculate(), displayUpdate.textContent = output, operator = event.target.textContent, buttonPressDec.disabled = false;
+    else return input1 = displayUpdate.textContent, operator = event.target.textContent, displayUpdate.textContent = "", buttonPressDec.disabled = false;
 });
 
 // ---- END ---- //
@@ -76,7 +80,7 @@ const startCalculate = function() {
         return displayUpdate.textContent = "Formating Error!"
     else if (operator === "/" && input2 == 0)
         return displayUpdate.textContent = "Error 404, Cant Divide By Zero!"
-    else return output = calculate(), displayUpdate.textContent = output, input1 = output, input2 = "", operator = "", setCheck = true;
+    else return output = calculate(), displayUpdate.textContent = output, input1 = output, input2 = "", operator = "", setCheck = true, buttonPressDec.disabled = false;
 };
 
 const buttonPressEval = document.querySelector("#evaluate");
@@ -89,7 +93,7 @@ buttonPressEval.addEventListener("click", () => {
 // ---- END ---- //
 // Clear/Reset Function
 
-const buttonPressClr = document.querySelector("#cmdPad1");
+const buttonPressClr = document.querySelector("#clr");
 
 buttonPressClr.addEventListener("click", () => {
     displayUpdate.textContent = ""
@@ -98,6 +102,20 @@ buttonPressClr.addEventListener("click", () => {
     operator = ""
     output = ""
     setCheck = false;
+    buttonPressDec.disabled = false;
 })
+
+// ---- END ---- //
+// Delete Function
+
+const buttonPressDel = document.querySelector("#delete");
+
+buttonPressDel.addEventListener("click", () => {
+    predict = displayUpdate.textContent.slice(0, -1);
+
+    if (!predict.includes('.')) 
+        return displayUpdate.textContent = displayUpdate.textContent.slice(0,-1), buttonPressDec.disabled = false;
+    else return displayUpdate.textContent = displayUpdate.textContent.slice(0,-1);
+});
 
 // ---- END ---- //
