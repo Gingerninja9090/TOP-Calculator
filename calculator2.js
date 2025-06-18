@@ -4,6 +4,7 @@ let input1 = "";
 let input2 = "";
 let operator = "";
 let output = "";
+let setCheck = false;
 
 // ---- END ---- //
 // Calculation Functions (Addition, Subtraction, Multiplication & Division)
@@ -48,9 +49,12 @@ const calculate = function() {
 
 const buttonPressNum = document.querySelector("#numPad");
 const displayUpdate = document.querySelector("#display");
+const buttonPressDec = document.querySelector("#decimal");
 
 buttonPressNum.addEventListener("click", (event) => {
-    displayUpdate.textContent = displayUpdate.textContent + event.target.textContent
+    if (setCheck === true) 
+        return displayUpdate.textContent = "" + event.target.textContent, setCheck = false;
+    else displayUpdate.textContent = displayUpdate.textContent + event.target.textContent
 });
 
 // ---- END ---- //
@@ -72,7 +76,7 @@ const startCalculate = function() {
         return displayUpdate.textContent = "Formating Error!"
     else if (operator === "/" && input2 == 0)
         return displayUpdate.textContent = "Error 404, Cant Divide By Zero!"
-    else return output = calculate(), displayUpdate.textContent = output, input1 = "", input2 = "", operator = "";
+    else return output = calculate(), displayUpdate.textContent = output, input1 = output, input2 = "", operator = "", setCheck = true;
 };
 
 const buttonPressEval = document.querySelector("#evaluate");
@@ -93,7 +97,7 @@ buttonPressClr.addEventListener("click", () => {
     input2 = ""
     operator = ""
     output = ""
-    help = ""
+    setCheck = false;
 })
 
 // ---- END ---- //
