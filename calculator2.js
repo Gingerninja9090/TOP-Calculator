@@ -119,3 +119,22 @@ buttonPressDel.addEventListener("click", () => {
 });
 
 // ---- END ---- //
+// Keyboard Support 
+
+const allowedKeysNum = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const allowedKeysOp = ["+", "-", "*", "/"];
+const allowedKeysEval = ["=", "Enter"];
+const allowedKeyDel = ["Backspace"];
+
+document.addEventListener("keydown", (event) => {
+    if (allowedKeysNum.includes(event.key)) 
+        return console.log("Number Key Pressed: " + event.key);
+    else if (allowedKeysOp.includes(event.key))
+        return console.log("Operator Key Pressed: " + event.key);
+    else if (allowedKeysEval.includes(event.key))
+        return console.log("Evaluation Key Pressed: " + event.key);
+    else if (allowedKeyDel.includes(event.key))
+        return console.log("Delete Key Pressed: " + event.key);
+});
+
+// ---- END ---- //
