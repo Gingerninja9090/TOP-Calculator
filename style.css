@@ -19,6 +19,10 @@ button {
     width: 150px;
 }
 
+.butMid {
+    width: 100px;
+}
+
 #display {
     height: 30px;
     width: 210px;
