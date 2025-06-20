@@ -79,7 +79,7 @@ const startCalculate = function() {
     if (input1 === "" || operator === "" || input2 === "")
         return displayUpdate.textContent = "Formating Error!"
     else if (operator === "/" && input2 == 0)
-        return displayUpdate.textContent = "Error 404, Cant Divide By Zero!"
+        return displayUpdate.textContent = "Error 404!"
     else return output = calculate(), displayUpdate.textContent = output, input1 = output, input2 = "", operator = "", setCheck = true, buttonPressDec.disabled = false;
 };
 
@@ -143,7 +143,7 @@ document.addEventListener("keydown", (event) => {
 
     else if (allowedKeysEval.includes(event.key))
         return input2 = displayUpdate.textContent, startCalculate();
-    
+
     else if (allowedKeyDel.includes(event.key))
         predict = displayUpdate.textContent.slice(0, -1);
         if (!predict.includes('.')) 
