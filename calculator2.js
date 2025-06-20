@@ -122,19 +122,33 @@ buttonPressDel.addEventListener("click", () => {
 // Keyboard Support 
 
 const allowedKeysNum = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const allowedKeyDec = ["."];
 const allowedKeysOp = ["+", "-", "*", "/"];
 const allowedKeysEval = ["=", "Enter"];
 const allowedKeyDel = ["Backspace"];
 
 document.addEventListener("keydown", (event) => {
     if (allowedKeysNum.includes(event.key)) 
-        return console.log("Number Key Pressed: " + event.key);
+        if (setCheck) 
+            return displayUpdate.textContent = "" + event.key, setCheck = false;
+        else return displayUpdate.textContent = displayUpdate.textContent + event.key
+
+    else if (allowedKeyDec.includes(event.key) && !displayUpdate.textContent.includes("."))
+        return displayUpdate.textContent = displayUpdate.textContent + event.key, buttonPressDec.disabled = true;
+
     else if (allowedKeysOp.includes(event.key))
-        return console.log("Operator Key Pressed: " + event.key);
+        if (operator != "") 
+            return input2 = displayUpdate.textContent, startCalculate(), displayUpdate.textContent = output, operator = event.key, buttonPressDec.disabled = false;
+        else return input1 = displayUpdate.textContent, operator = event.key, displayUpdate.textContent = "", buttonPressDec.disabled = false;
+
     else if (allowedKeysEval.includes(event.key))
-        return console.log("Evaluation Key Pressed: " + event.key);
+        return input2 = displayUpdate.textContent, startCalculate();
+    
     else if (allowedKeyDel.includes(event.key))
-        return console.log("Delete Key Pressed: " + event.key);
+        predict = displayUpdate.textContent.slice(0, -1);
+        if (!predict.includes('.')) 
+            return displayUpdate.textContent = displayUpdate.textContent.slice(0,-1), buttonPressDec.disabled = false;
+        else return displayUpdate.textContent = displayUpdate.textContent.slice(0,-1);
 });
 
 // ---- END ---- //
